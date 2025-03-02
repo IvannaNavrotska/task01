@@ -4,13 +4,13 @@ import os
 
 def rle_encoder(data: bytes) -> bytes:
 
-    restriction = 5
+    restriction = 5 #обмеження для стискання послідовності різних символів
     
     i = 0
     n = len(data)
     output = bytearray()
     
-    while i < n:
+    while i < n:  #накопичення однакових символів (>= 2)
         run_len = 1
         run_byte = data[i]
         
@@ -20,27 +20,26 @@ def rle_encoder(data: bytes) -> bytes:
             j += 1
         
         if run_len >= 2:
-            L = 128 + (run_len - 2)  
+            L = 128 + (run_len - 2)  #послідовність з однакових символів
             output.append(L)
             output.append(run_byte)
             i += run_len
-        else:
-            raw = [run_byte]
-            i += 1
             
-            
-            while i < n and len(raw) < restriction:
-                if i + 1 < n and data[i] == data[i+1]:
-                    raw.append(data[i])
+        else:  
+            unique = [run_byte] #послідовність з неповторюваних символів
+            i += 1          
+            while i < n and len(unique) < restriction:
+                if i + 1 < n and data[i] == data[i+1]: 
+                    unique.append(data[i])
                     i += 1
                     break
                 else:
-                    raw.append(data[i])
+                    unique.append(data[i])
                     i += 1
             
-            L = len(raw) - 1
+            L = len(unique) - 1 
             output.append(L)
-            output.extend(raw)
+            output.extend(unique)
     
     return bytes(output)
 
@@ -59,14 +58,14 @@ def rle_decoder(encoded: bytes) -> bytes:
         i += 1
         
         if L < 128:
-            length = L + 1  
+            length = L + 1  #для різних символів
             if i + length > n:
                 raise ValueError('неповнивний блок для різних байтів')
             block = encoded[i : i + length]
             output.extend(block)
             i += length
         else:
-            length = (L - 128) + 2  
+            length = (L - 128) + 2  #кількість однакових символів
             if i >= n:
                 raise ValueError('неповнивний блок для різних байтів')
             repeated_byte = encoded[i]
