@@ -11,13 +11,19 @@ def rle_coder(example):
         if example[i] == example[i-1]:
             count +=1
         else:
-            rle_file += f'{example[i-1]}{count}'
+            rle_file += f'{count}{example[i-1]}'
 
             count = 1
             
-    rle_file += f'{example[-1]}{count}'
+    rle_file += f'{count}{example[-1]}'
 
     return rle_file
 
 print(rle_coder(example))
+
+
+
+    
+
+
 
