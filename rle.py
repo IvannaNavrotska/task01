@@ -117,7 +117,7 @@ def decode_file(in_filename: str, out_filename: str = None) -> None:
 def main():
    
     if len(sys.argv) < 3:
-        print('Використання:')
+        print('інструкція з користування:')
         print('rle.py encode <in_file> [out_file]')
         print('rle.py decode <in_file> [out_file]')
         sys.exit(1)
@@ -131,10 +131,10 @@ def main():
     elif mode == 'decode':
         decode_file(in_file, out_file)
     else:
-        print('Неправильна команда')
+        print('неправильна команда')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     if len(sys.argv) == 1:
         original_data = b'acdefghgrtwaaaBBBcDDDDDDDDDDDeeeeeeeeeeffffffgggggggh'  
@@ -146,5 +146,5 @@ if __name__ == "__main__":
         decoded = RLE_decoder(encoded)
         
         print('розкодовано:', decoded)
-        print("Співпадають?", decoded == original_data)
+        print('cпівпадають?', decoded == original_data)
         
