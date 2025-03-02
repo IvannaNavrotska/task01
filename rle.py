@@ -135,16 +135,21 @@ def main():
 
 
 if __name__ == '__main__':
-
+    
     if len(sys.argv) == 1:
-        original_data = b'acdefghgrtwaaaBBBcDDDDDDDDDDDeeeeeeeeeeffffffgggggggh'  
-        print('оригінальні дані:', original_data)
+        original_data = b'abbbbaaccccc'
+        print('до кодування:', original_data)
         
         encoded = RLE_encoder(original_data)
-        print('закодовано (hex):', encoded.hex())
-        
+        print('після кодування (hex):', encoded.hex())
+
         decoded = RLE_decoder(encoded)
-        
         print('розкодовано:', decoded)
-        print('cпівпадають?', decoded == original_data)
+        print('співпадають?', decoded == original_data)
+
+        original_size = len(original_data)
+        encoded_size = len(encoded)
+        print('розмір до кодування:', original_size, 'байтів')
+        print('розмір після кодування:', encoded_size, 'байтів')
+
         
