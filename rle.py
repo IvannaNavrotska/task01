@@ -2,7 +2,7 @@ import sys
 import os
 
 
-def rle_encoder(data: bytes) -> bytes:
+def RLE_encoder(data: bytes) -> bytes:
 
     restriction = 5 #обмеження для стискання послідовності різних символів
     
@@ -45,7 +45,7 @@ def rle_encoder(data: bytes) -> bytes:
 
 
 
-def rle_decoder(encoded: bytes) -> bytes:
+def RLE_decoder(encoded: bytes) -> bytes:
     
     i = 0
     n = len(encoded)
@@ -84,7 +84,7 @@ def encode_file(in_filename: str, out_filename: str = None) -> None:
     with open(in_filename, 'rb') as f_in:
         data = f_in.read()
     
-    encoded = rle_encoder(data)
+    encoded = RLE_encoder(data)
     
     with open(out_filename, 'wb') as f_out:
         f_out.write(encoded)
@@ -140,10 +140,10 @@ if __name__ == "__main__":
         original_data = b'acdefghgrtwaaaBBBcDDDDDDDDDDDeeeeeeeeeeffffffgggggggh'  
         print('оригінальні дані:', original_data)
         
-        encoded = rle_encoder(original_data)
+        encoded = RLE_encoder(original_data)
         print('закодовано (hex):', encoded.hex())
         
-        decoded = rle_decoder(encoded)
+        decoded = RLE_decoder(encoded)
         
         print('розкодовано:', decoded)
         print("Співпадають?", decoded == original_data)
