@@ -141,7 +141,7 @@ if __name__ == '__main__':
         print('до кодування:', original_data)
         
         encoded = RLE_encoder(original_data)
-        print('після кодування (hex):', encoded.hex())
+        print('після кодування:', encoded)
 
         decoded = RLE_decoder(encoded)
         print('розкодовано:', decoded)
